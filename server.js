@@ -12,7 +12,7 @@ const { authRouter  } = require("./routers/auth.router");
 const passportSetup = require("./config/passport-setup");
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-//const keys=require('./config/keys');
+
 const cookieParser = require("cookie-parser");
 const constants = require('./constants')
 
@@ -72,7 +72,7 @@ const authCheck = (req, res, next) => {
     });
   });
 
-app.use((req, res, next) => {
+authRouter.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.set('Content-Type', 'application/json');
