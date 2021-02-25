@@ -38,8 +38,8 @@ app.use(passport.session());
 
 app.use(cors({
     origin: "http://localhost:3000", // allow to server to accept request from different origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true //
+    methods: "GET,PUT,POST,DELETE, OPTION",
+    credentials: true 
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -72,12 +72,12 @@ const authCheck = (req, res, next) => {
     });
   });
 
-  app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-    credentials: true,
-    preflightContinue: true
-}));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.set('Content-Type', 'application/json');
+    next();
+});
 
 app.get("/", (req, res) => {
     res.status(200).send(`Welcome to OpenSky`);
