@@ -21,7 +21,8 @@ const port = process.env.PORT || 8080
 app.use(cors({
   origin: "http://localhost:3000", // allow to server to accept request from different origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  credentials: true
+  credentials: true,
+  allowedHeaders: 'Accept, Content-Type, X-Requested-With',
 }));
 
 
