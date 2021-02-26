@@ -18,6 +18,13 @@ const constants = require('./constants')
 const app = express();
 const port = process.env.PORT || 8080 
 
+app.use(cors({
+  origin: "http://localhost:3000", // allow to server to accept request from different origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  credentials: true
+}));
+
+
 app.use(logger('combined', {
   stream: fs.createWriteStream('./logs.txt', {flags: 'a'})
 }));
@@ -35,11 +42,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-    origin: "http://localhost:3000", // allow to server to accept request from different origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true //
-}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(logger("dev"));
@@ -62,7 +65,7 @@ const authCheck = (req, res, next) => {
       next();
     }
   };
-  app.get("/", authCheck, (req, res) => {
+app.get("/", authCheck, (req, res) => {
     res.status(200).json({
       authenticated: true,
       message: "user successfully authenticated",
@@ -71,12 +74,6 @@ const authCheck = (req, res, next) => {
     });
   });
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.set('Content-Type', 'application/json');
-    next();
-});
 
 app.get("/", (req, res) => {
     res.status(200).send(`Welcome to OpenSky`);
