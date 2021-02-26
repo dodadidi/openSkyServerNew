@@ -1,5 +1,6 @@
 const passport = require('passport')
 const { Router } = require('express');
+const authRouter = new Router();
 const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
 
 // when login is successful, retrieve user info
