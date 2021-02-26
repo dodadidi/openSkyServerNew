@@ -22,7 +22,7 @@ app.use(cors({
   origin: "http://localhost:3000", // allow to server to accept request from different origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
-  allowedHeaders: 'Accept, Content-Type, X-Requested-With',
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, X-PINGOTHER',
 }));
 
 
