@@ -13,6 +13,7 @@ authRouter.get("/login/success", (req, res) => {
             cookies: req.cookies
         });
     }
+    
 });
 
 // when login failed, send failed msg
@@ -35,6 +36,7 @@ authRouter.get("/google", passport.authenticate("google",  {scope: 'https://www.
 // callback route for google to redirect to
 authRouter.get("/google/redirect",
     passport.authenticate("google", {
+        scope: 'https://www.googleapis.com/auth/plus.login',
         successRedirect: CLIENT_HOME_PAGE_URL,
         failureRedirect: "/auth/login/failed"
     })
