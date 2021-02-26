@@ -12,7 +12,6 @@ const { authRouter  } = require("./routers/auth.router");
 const passportSetup = require("./config/passport-setup");
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-
 const cookieParser = require("cookie-parser");
 const constants = require('./constants')
 
@@ -38,8 +37,8 @@ app.use(passport.session());
 
 app.use(cors({
     origin: "http://localhost:3000", // allow to server to accept request from different origin
-    methods: "GET,PUT,POST,DELETE, OPTION",
-    credentials: true 
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true //
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
